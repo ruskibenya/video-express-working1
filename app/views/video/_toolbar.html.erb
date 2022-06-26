@@ -1,17 +1,20 @@
+
+
+
 <div id="toolbar">
 
   <!-- Mute all / Unmute all -->
-
-    <vwc-icon-button icon="audio-max-solid" shape="circled" layout="filled" id="mute-all" class="vvd-scheme-alternate"></vwc-icon-button>
-    <vwc-icon-button icon="audio-off-solid" shape="circled" layout="filled" id="unmute-all" class="hidden vvd-scheme-alternate"></vwc-icon-button>
+    <vwc-icon-button icon="audio-max-solid" shape="circled" layout="filled" id="mute-all" class="white-border"></vwc-icon-button>
+    <vwc-icon-button icon="audio-off-solid" shape="circled" layout="filled" id="unmute-all" class="hidden white-border"></vwc-icon-button>
 
 
   <!-- Mute self / Unmute self -->
-  <vwc-action-group layout="outlined" shape="pill">
-    <vwc-icon-button icon="mic-mute-solid" shape="circled" layout="filled" id="mute-self" ></vwc-icon-button>
-    <vwc-icon-button icon="microphone-2-solid" shape="circled" layout="filled" id="unmute-self" class="hidden"></vwc-icon-button>
+  <vwc-action-group layout="outlined" shape="pill" class="vvd-scheme-alternate">
+    <vwc-icon-button icon="mic-mute-solid" shape="circled" layout="ghost" id="mute-self" class="vvd-scheme-alternate" ></vwc-icon-button>
+    <vwc-icon-button icon="microphone-2-solid" shape="circled" layout="ghost" id="unmute-self" class="hidden vvd-scheme-alternate"></vwc-icon-button>
     <span role="separator"></span>
-    <vwc-select appearance="ghost" id="audio-input">
+    <vwc-icon-button icon="chevron-down-solid" shape="circled"></vwc-icon-button>
+    <vwc-select appearance="ghost" id="audio-input" class="hidden">
       <vwc-list-item
         mwc-list-item=""
         tabindex="0"
@@ -21,18 +24,19 @@
         selected=""
         activated=""
       >
-        Select one
+
       </vwc-list-item>
     </vwc-select>
   </vwc-action-group>
 
 
   <!-- Disable camera / Enable camera -->
-  <vwc-action-group layout="outlined" shape="pill">
-    <vwc-icon-button icon="video-off-solid" shape="circled" layout="filled" id="hide-self" ></vwc-icon-button>
-    <vwc-icon-button icon="video-solid" shape="circled" layout="filled" id="unhide-self" class="hidden"></vwc-icon-button>
+  <vwc-action-group layout="outlined" shape="pill" class="vvd-scheme-alternate">
+    <vwc-icon-button icon="video-off-solid" shape="circled" layout="ghost" id="hide-self" class="vvd-scheme-alternate" ></vwc-icon-button>
+    <vwc-icon-button icon="video-solid" shape="circled" layout="ghost" id="unhide-self" class="hidden vvd-scheme-alternate"></vwc-icon-button>
     <span role="separator"></span>
-    <vwc-select appearance="ghost" id="video-input">
+    <vwc-icon-button icon="chevron-down-solid" shape="circled"></vwc-icon-button>
+    <vwc-select appearance="ghost" id="video-input" class="hidden">
       <vwc-list-item
         mwc-list-item=""
         tabindex="0"
@@ -48,10 +52,11 @@
   </vwc-action-group>
 
   <!-- Select Audio Output -->
-  <vwc-action-group layout="outlined" shape="pill">
-    <vwc-icon-button icon="headset-solid" shape="circled" layout="filled" id="hide-self" ></vwc-icon-button>
+  <vwc-action-group layout="outlined" shape="pill" class="vvd-scheme-alternate">
+    <vwc-icon-button icon="headset-solid" shape="circled" layout="ghost" id="hide-self" class="vvd-scheme-alternate"></vwc-icon-button>
     <span role="separator"></span>
-    <vwc-select appearance="ghost" id="audio-output">
+    <vwc-icon-button icon="chevron-down-solid" shape="circled"></vwc-icon-button>
+    <vwc-select appearance="ghost" id="audio-output" class="hidden">
       <vwc-list-item
         mwc-list-item=""
         tabindex="0"

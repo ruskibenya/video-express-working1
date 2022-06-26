@@ -1,12 +1,8 @@
-<style>
-  .sb-show-main.sb-main-padded {
-    padding: 0;
-  }
-</style>
 <vwc-top-app-bar-fixed alternate="true">
   <span slot="title" id="title">Big Game Chill Zone</span>
   <% if @name == @moderator_name  %>
-    <vwc-theme-switch slot="actionItems" scheme="light"></vwc-theme-switch>
+    <span slot="actionItems" id="mode-name">Chill Mode</span>
+    <vwc-switch slot="actionItems"></vwc-switch>
   <% else %>
     <span slot="actionItems"><%= @moderator_name %> is the host</span>
   <% end %>
@@ -15,23 +11,17 @@
 <script>
   const title = document.querySelector('#title');
 
-  const chill_mode_btn = document.querySelector('#chill-mode');
-  const watch_mode_btn = document.querySelector('#watch-mode');
-
 
   let toggleParticipants = (participants, state) => {
-     console.log("inside the toggleParticipants");
-     console.log(participants);
+    const mode_name = document.querySelector(#'mode-name');
     Object.entries(participants).forEach(participant => {
       if (state === "chill"){
-        chill_mode_btn.style.display = "none";
-        watch_mode_btn.style.display = "block";
         title.innerHTML = "Big Game Live!";
+        mode_name.innerHTML = "Watch Mode"
         room.setLayoutMode("active-speaker");
       } else if (state === "watch") {
-        chill_mode_btn.style.display = "block"
-        watch_mode_btn.style.display = "none";
         title.innerHTML = "Big Game Chill Zone";
+        mode_name.innerHTML = "Chill Mode";
         room.setLayoutMode("grid")
       } else {
         console.log("Error in state of toggleParticipants")
@@ -39,23 +29,38 @@
     })
   }
 
+  const switch_btn = document.querySelector('vwc-switch');
+  switch_btn.addEventListener('change', (event) => {
+    console.log(event)
+    if (event.target.checked){
+      room.startScreensharing("roomContainer");
+      // toggleParticipants(room.participants, "chill");
+    }
+    else if (!event.target.checked){
+      room.stopScreensharing("roomContainer");
+      // toggleParticipants(room.participants, "watch");
+    }
+    else{
+      console.log("Error in Switch Button Listener");
+    }
+  })
+
 // turn on screenshare by moderator; change styles & disable video + audio
-// need to scope for moderator only
-if (chill_mode_btn){
-  chill_mode_btn.addEventListener("click", function() {
-    room.startScreensharing("roomContainer");
-    toggleParticipants(room.participants, "chill");
-  });
-}
+// // need to scope for moderator only
+// if (chill_mode_btn){
+//   chill_mode_btn.addEventListener("click", function() {
+
+//   });
+// }
 
 
-// turn off screenshare by moderator; change styles & enable video + audio
-// need to scope for moderator only
-if (watch_mode_btn){
-  watch_mode_btn.addEventListener("click", function() {
-    room.stopScreensharing("roomContainer");
-    toggleParticipants(room.participants, "watch");
- })
-}
+// // turn off screenshare by moderator; change styles & enable video + audio
+// // need to scope for moderator only
+// if (watch_mode_btn){
+//   watch_mode_btn.addEventListener("click", function() {
+//     room.stopScreensharing("roomContainer");
+//     toggleParticipants(room.participants, "watch");
+//  })
+// }
 
 </script>

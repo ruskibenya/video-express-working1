@@ -21,6 +21,11 @@
   border-radius: 10px;
 }
 
+// Vivid Global Style
+.sb-show-main.sb-main-padded {
+    padding: 0;
+  }
+
 // Chat Side Drawer Styles
 aside{
   position: fixed;
@@ -28,9 +33,6 @@ aside{
   max-width: 175px;
 }
 
-  .sb-show-main.sb-main-padded {
-    padding: 0;
-  }
   vwc-side-drawer#side-drawer {
     /* Initial side drawer height is 100vh, but once the top bar is added,
     the side drawer height will need to be reduced. */
@@ -45,12 +47,18 @@ aside{
   display: flex;
   justify-content: space-around;
   margin: auto;
-  width: 50%;
+  width: 30%;
   background-color: var(--vvd-color-primary);
   padding: 10px;
+  border-radius: 8px 8px 0 0;
 }
 
 .hidden{
   display: none;
+}
+
+.white-border{
+  border: 2px solid white;
+  border-radius: 50%;
 }
 
