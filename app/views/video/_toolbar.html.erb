@@ -1,0 +1,238 @@
+<div id="toolbar">
+
+  <!-- Mute all / Unmute all -->
+
+    <vwc-icon-button icon="audio-max-solid" shape="circled" layout="filled" id="mute-all" class="vvd-scheme-alternate"></vwc-icon-button>
+    <vwc-icon-button icon="audio-off-solid" shape="circled" layout="filled" id="unmute-all" class="hidden vvd-scheme-alternate"></vwc-icon-button>
+
+
+  <!-- Mute self / Unmute self -->
+  <vwc-action-group layout="outlined" shape="pill">
+    <vwc-icon-button icon="mic-mute-solid" shape="circled" layout="filled" id="mute-self" ></vwc-icon-button>
+    <vwc-icon-button icon="microphone-2-solid" shape="circled" layout="filled" id="unmute-self" class="hidden"></vwc-icon-button>
+    <span role="separator"></span>
+    <vwc-select appearance="ghost" id="audio-input">
+      <vwc-list-item
+        mwc-list-item=""
+        tabindex="0"
+        aria-disabled="false"
+        role="option"
+        aria-selected="true"
+        selected=""
+        activated=""
+      >
+        Select one
+      </vwc-list-item>
+    </vwc-select>
+  </vwc-action-group>
+
+
+  <!-- Disable camera / Enable camera -->
+  <vwc-action-group layout="outlined" shape="pill">
+    <vwc-icon-button icon="video-off-solid" shape="circled" layout="filled" id="hide-self" ></vwc-icon-button>
+    <vwc-icon-button icon="video-solid" shape="circled" layout="filled" id="unhide-self" class="hidden"></vwc-icon-button>
+    <span role="separator"></span>
+    <vwc-select appearance="ghost" id="video-input">
+      <vwc-list-item
+        mwc-list-item=""
+        tabindex="0"
+        aria-disabled="false"
+        role="option"
+        aria-selected="true"
+        selected=""
+        activated=""
+      >
+        Select one
+      </vwc-list-item>
+    </vwc-select>
+  </vwc-action-group>
+
+  <!-- Select Audio Output -->
+  <vwc-action-group layout="outlined" shape="pill">
+    <vwc-icon-button icon="headset-solid" shape="circled" layout="filled" id="hide-self" ></vwc-icon-button>
+    <span role="separator"></span>
+    <vwc-select appearance="ghost" id="audio-output">
+      <vwc-list-item
+        mwc-list-item=""
+        tabindex="0"
+        aria-disabled="false"
+        role="option"
+        aria-selected="true"
+        selected=""
+        activated=""
+      >
+        Select one
+      </vwc-list-item>
+    </vwc-select>
+  </vwc-action-group>
+</div>
+
+<script>
+  const mute_all_btn = document.querySelector('#mute-all');
+  const unmute_all_btn = document.querySelector('#unmute-all');
+
+  const mute_self_btn = document.querySelector('#mute-self');
+  const unmute_self_btn = document.querySelector('#unmute-self');
+
+  const hide_self_btn = document.querySelector('#hide-self');
+  const unhide_self_btn = document.querySelector('#unhide-self');
+
+  // Mute/Unmute All Participants
+  let toggleMuteAll = (participants, state) => {
+    Object.entries(participants).forEach(participant => {
+      if (state === "mute"){
+        mute_all_btn.style.display = "none";
+        unmute_all_btn.style.display = "block";
+        // why need both here???
+        room.camera.disableAudio();
+        participant[1].camera.disableAudio();
+      } else if (state === "unmute") {
+        unmute_all_btn.style.display = "none";
+        mute_all_btn.style.display = "block";
+        room.camera.enableAudio();
+        participant[1].camera.enableAudio();
+      } else {
+        console.log("Error in state of toggleMuteAll")
+      }
+    })
+  }
+
+  // turn on mute all for subscriber
+  mute_all_btn.addEventListener("click", function() {
+   toggleMuteAll(room.participants, "mute");
+  });
+
+  unmute_all_btn.addEventListener("click", function() {
+   toggleMuteAll(room.participants, "unmute");
+  });
+
+  // Enable/Disable Mic
+  let toggleMic = () => {
+    if (room.camera.isAudioEnabled()){
+      mute_self_btn.style.display = "none";
+      unmute_self_btn.style.display = "block";
+      room.camera.disableAudio();
+    } else if (!room.camera.isAudioEnabled()){
+      unmute_self_btn.style.display = "none";
+      mute_self_btn.style.display = "block";
+      room.camera.enableAudio();
+    } else {
+      console.log("Error in toggleMic")
+    }
+  }
+
+  // disable mic
+  mute_self_btn.addEventListener("click", function() {
+   toggleMic();
+  })
+
+  // enable mic
+  unmute_self_btn.addEventListener("click", function() {
+   toggleMic();
+  })
+
+  // Enable/Disable Camera
+  let toggleCamera = () => {
+    if (room.camera.isVideoEnabled()){
+      hide_self_btn.style.display = "none";
+      unhide_self_btn.style.display = "block";
+      room.camera.disableVideo();
+    } else if (!room.camera.isVideoEnabled()){
+      unhide_self_btn.style.display = "none";
+      hide_self_btn.style.display = "block";
+      room.camera.enableVideo();
+    } else {
+      console.log("Error in toggleMic")
+    }
+  }
+
+  // disable camera
+  hide_self_btn.addEventListener("click", function() {
+   toggleCamera();
+  })
+
+  // enable camera
+  unhide_self_btn.addEventListener("click", function() {
+   toggleCamera();
+  })
+
+
+  // retrieve lists of auidoInputs and videoInputs
+  let audioInputs = []
+  let videoInputs = []
+  const availableDevices = VideoExpress.getDevices ();
+  availableDevices.then(devices =>{
+    devices.forEach(device => {
+      if (device.kind === "audioInput"){
+        audioInputs.push(device)
+      }
+      else if (device.kind === "videoInput"){
+        videoInputs.push(device)
+      }
+      else{
+        console.log("Error in retrieveDevices");
+      }
+    })
+  }).catch(err => {
+    console.log(err);
+  })
+
+  // add inputs to select menu
+  let addSelectOptions = (target, inputs) => {
+    const targetSelect = document.querySelector(`${target}`);
+    inputs.forEach(input => {
+      let opt = document.createElement('vwc-list-item');
+      opt.value = input.deviceId;
+      opt.innerHTML = input.label;
+      targetSelect.appendChild(opt);
+    })
+  }
+
+  // listen for changes to selected audio/video inputs
+  // update room when inputs are changed
+  let listenInputChange = (target) => {
+    const targetSelect = document.querySelector(`${target}`);
+    targetSelect.addEventListener('change', (inputOption) => {
+      if (target === "vwc-select#audio-input"){
+        room.camera.setAudioDevice(inputOption.target.value);
+      }
+      else if (target === "vwc-select#video-input"){
+        room.camera.setVideoDevice(inputOption.target.value);
+      }
+      else{
+        console.log("Error in listenInputChange");
+      }
+    })
+  }
+
+  // Once Dom is loaded addSelectOptions for audioInputs and videoInputs
+  // And listen for changes to selected inputs
+  window.addEventListener('DOMContentLoaded', (event) => {
+    addSelectOptions("vwc-select#audio-input", audioInputs);
+    listenInputChange("vwc-select#audio-input");
+    addSelectOptions("vwc-select#video-input", videoInputs);
+    listenInputChange("vwc-select#video-input");
+  })
+
+  // retrieve lists of auidoOutput
+  // add audioOutputs to select menu
+  // On user select new option, update audio input
+
+
+  async function audioOutputs() {
+    var audioOutputs = await VideoExpress.getAudioOutputDevices();
+    const audioOutputSelect = document.querySelector('vwc-select#audio-output');
+    audioOutputs.forEach(output => {
+      let opt = document.createElement('vwc-list-item');
+      opt.value = output.deviceId;
+      opt.innerHTML = output.label;
+      audioOutputSelect.appendChild(opt);
+    })
+
+    audioOutputSelect.addEventListener('change', (audioOutputOption) => {
+      VideoExpress.setAudioOutputDevice(audioOutputOption.target.value);
+    });
+  }
+
+  audioOutputs();
+</script>

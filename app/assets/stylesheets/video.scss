@@ -1,0 +1,56 @@
+// Place all the styles related to the Video controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+
+// Video Express Styles
+#roomContainer {
+  width: calc(100vw - 175px);
+  height: calc(100vh - 90px);
+  position: relative;
+}
+#roomContainer > .OT_publisher {
+  top: 25px;
+  right: 25px;
+  position: absolute;
+  border-radius: 10px;
+}
+#roomContainer > .OT_screenshare {
+  top: 25px;
+  left: 25px;
+  position: absolute;
+  border-radius: 10px;
+}
+
+// Chat Side Drawer Styles
+aside{
+  position: fixed;
+  right: 0;
+  max-width: 175px;
+}
+
+  .sb-show-main.sb-main-padded {
+    padding: 0;
+  }
+  vwc-side-drawer#side-drawer {
+    /* Initial side drawer height is 100vh, but once the top bar is added,
+    the side drawer height will need to be reduced. */
+    height: calc(100vh - 64px);
+    --side-drawer-z-index:3;
+    --side-drawer-background-color: var(--vvd-color-primary);
+  }
+
+
+// toolbar styles
+#toolbar{
+  display: flex;
+  justify-content: space-around;
+  margin: auto;
+  width: 50%;
+  background-color: var(--vvd-color-primary);
+  padding: 10px;
+}
+
+.hidden{
+  display: none;
+}
+

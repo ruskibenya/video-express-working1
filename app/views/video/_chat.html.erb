@@ -1,0 +1,17 @@
+<style>
+  .sb-show-main.sb-main-padded {
+    padding: 0;
+  }
+  vwc-side-drawer#side-drawer {
+    /* Initial side drawer height is 100vh, but once the top bar is added,
+    the side drawer height will need to be reduced. */
+    height: calc(100vh - 64px);
+    --side-drawer-z-index:3;
+  }
+</style>
+<vwc-side-drawer open="" id="side-drawer">
+  <span slot="top-bar">
+    <vwc-icon type="vonage-mono"></vwc-icon>
+    <vwc-text font-face="body-1-bold">VONAGE</vwc-text>
+  </span>
+</vwc-side-drawer>

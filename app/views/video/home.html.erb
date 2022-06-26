@@ -1,0 +1,58 @@
+
+
+<vwc-card heading="Big Game Watch Party" text="Built With Vonage Video Express on Rails">
+  <div slot="main">
+    <form>
+      <vwc-textfield name="username" label="Enter Your Name" icon="user" outlined="">
+        <input
+          value=""
+          slot="formInputElement"
+          class="vivid-input-internal"
+          name="username"
+          type="text"
+          placeholder=" "
+        />
+      </vwc-textfield>
+      <vwc-textfield
+        name="password"
+        label="Enter Team Passcode"
+        icon="lock"
+        type="password"
+        outlined=""
+      >
+        <input
+          value=""
+          slot="formInputElement"
+          class="vivid-input-internal"
+          name="password"
+          type="password"
+          placeholder=""
+        />
+      </vwc-textfield>
+      <div class="controls">
+        <vwc-button layout="outlined" type="reset" outlined="">
+          Reset
+          <button type="reset" style="display: none;"></button>
+        </vwc-button>
+        <vwc-button layout="filled" type="submit" unelevated="">
+          Submit
+          <button type="submit" style="display: none;"></button>
+        </vwc-button>
+      </div>
+    </form>
+  </div>
+</vwc-card>
+
+<style>
+
+  form {
+      display: grid;
+      gap: 20px;
+    }
+    .controls {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+    }
+</style>
+

@@ -1,0 +1,30 @@
+<script src="https://static.opentok.com/v1/js/video-express.js"></script>
+<header>
+  <%= render partial: 'header' %>
+</header>
+
+<main class="app">
+  <div id="screenPublisherContainer"></div>
+  <div id="roomContainer"></div>
+  <toolbar class="toolbar">
+    <%= render partial: 'toolbar' %>
+  </toolbar>
+  <aside class="chat">
+    <%= render partial: 'chat' %>
+  </aside>
+
+  <%= render partial: 'button-chat' %>
+</main>
+
+
+<script type="text/javascript">
+ const room = new VideoExpress.Room({
+   apiKey: '<%= @api_key %>', // add your OpenTok API key
+   sessionId: '<%= @session_id %>', // add your OpenTok Session ID
+   token: '<%= @token %>', // add your OpenTok token
+   roomContainer: 'roomContainer'
+ });
+ room.join();
+</script>
+
+
