@@ -4,15 +4,10 @@
 </header>
 
 <main class="app">
-  <div id="screenPublisherContainer"></div>
   <div id="roomContainer"></div>
-  <toolbar class="toolbar">
+  <toolbar class="toolbar-wrapper">
     <%= render partial: 'toolbar' %>
   </toolbar>
-  <aside class="chat">
-    <%= render partial: 'chat' %>
-  </aside>
-
   <%= render partial: 'button-chat' %>
 </main>
 
@@ -22,7 +17,8 @@
    apiKey: '<%= @api_key %>', // add your OpenTok API key
    sessionId: '<%= @session_id %>', // add your OpenTok Session ID
    token: '<%= @token %>', // add your OpenTok token
-   roomContainer: 'roomContainer'
+   roomContainer: 'roomContainer',
+   participantName: '<%= @name %>'
  });
  room.join();
 </script>

@@ -4,8 +4,8 @@
 
 // Video Express Styles
 #roomContainer {
-  width: calc(100vw - 175px);
-  height: calc(100vh - 90px);
+  width: 100vw;
+  height: calc(100vh - 130px);
   position: relative;
 }
 #roomContainer > .OT_publisher {
@@ -21,33 +21,24 @@
   border-radius: 10px;
 }
 
-// Vivid Global Style
-.sb-show-main.sb-main-padded {
-    padding: 0;
-  }
+
 
 // Chat Side Drawer Styles
 aside{
   position: fixed;
   right: 0;
-  max-width: 175px;
 }
 
-  vwc-side-drawer#side-drawer {
-    /* Initial side drawer height is 100vh, but once the top bar is added,
-    the side drawer height will need to be reduced. */
-    height: calc(100vh - 64px);
-    --side-drawer-z-index:3;
-    --side-drawer-background-color: var(--vvd-color-primary);
-  }
 
 
 // toolbar styles
-#toolbar{
+
+
+.toolbar{
   display: flex;
   justify-content: space-around;
-  margin: auto;
-  width: 30%;
+  margin: 0 auto;
+  width: 550px;
   background-color: var(--vvd-color-primary);
   padding: 10px;
   border-radius: 8px 8px 0 0;
@@ -62,3 +53,23 @@ aside{
   border-radius: 50%;
 }
 
+.select-max-width{
+  max-width: 75px;
+}
+
+vwc-tooltip {
+  --tooltip-inline-size: 100px;
+  text-align: center;
+}
+
+
+// chat styles
+.chat{
+  width: 200px;
+  height: calc(100vh - 64px);
+  background-color: var(--vvd-color-primary);
+}
+
+.avatar{
+  background-color: var(--vvd-color-announcement);
+}
