@@ -83,34 +83,32 @@
   const hide_self_btn = document.querySelector('#hide-self');
   const unhide_self_btn = document.querySelector('#unhide-self');
 
-  // Mute/Unmute All Participants
-  let toggleMuteAll = (participants, state) => {
-    Object.entries(participants).forEach(participant => {
-      if (state === "mute"){
-        mute_all_btn.style.display = "none";
-        unmute_all_btn.style.display = "block";
-        // why need both here???
-        room.camera.disableAudio();
-        participant[1].camera.disableAudio();
-      } else if (state === "unmute") {
-        unmute_all_btn.style.display = "none";
-        mute_all_btn.style.display = "block";
-        room.camera.enableAudio();
-        participant[1].camera.enableAudio();
-      } else {
-        console.log("Error in state of toggleMuteAll")
-      }
+
+   let ToggleMuteAllButton = ({button: button, state: state, participants: participants}) =>{
+    button.addEventListener("click", function(){
+      Object.entries(participants).forEach(participant => {
+        if (state === "mute"){
+          mute_all_btn.style.display = "none";
+          unmute_all_btn.style.display = "block";
+          // why need both here???
+          room.camera.disableAudio();
+          participant[1].camera.disableAudio();
+        } else if (state === "unmute") {
+          unmute_all_btn.style.display = "none";
+          mute_all_btn.style.display = "block";
+          room.camera.enableAudio();
+          participant[1].camera.enableAudio();
+        } else {
+          console.log("Error in state of toggleMuteAll")
+        }
+      })
     })
   }
 
-  // turn on mute all for subscriber
-  mute_all_btn.addEventListener("click", function() {
-   toggleMuteAll(room.participants, "mute");
-  });
-
-  unmute_all_btn.addEventListener("click", function() {
-   toggleMuteAll(room.participants, "unmute");
-  });
+  // ToggleMuteAllButton({button: mute_all_btn, state: "mute", participants: room.participants});
+  // ToggleMuteAllButton({button: unmute_all_btn, state: "unmute", participants: room.participants});
+  console.log("room");
+  console.log(room);
 
   // Enable/Disable Mic
   let toggleMic = () => {

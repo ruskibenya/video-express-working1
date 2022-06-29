@@ -30,11 +30,11 @@
   const switch_btn = document.querySelector('vwc-switch');
   switch_btn.addEventListener('change', (event) => {
     if (event.target.checked){
-      room.startScreensharing("roomContainer");
+      room.startScreensharing();
       toggleParticipants(room.participants, "chill");
     }
     else if (!event.target.checked){
-      room.stopScreensharing("roomContainer");
+      room.stopScreensharing();
       toggleParticipants(room.participants, "watch");
     }
     else{

@@ -19,9 +19,6 @@ class VideoController < ApplicationController
   def party
   end
 
-  def screenshare
-  end
-
   def login
     @name = login_params[:name]
     if login_params[:password] == ENV['PARTY_PASSWORD']
