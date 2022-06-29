@@ -7,8 +7,8 @@ import Rails from "@rails/ujs"
 import Turbolinks from "turbolinks"
 import * as ActiveStorage from "@rails/activestorage"
 import "channels"
-import { VWCButton } from '@vonage/vivid';
-import { VWCCard } from '@vonage/vivid';
+import '@vonage/vivid';
+require("plugins/video-express");
 
 
 Rails.start()

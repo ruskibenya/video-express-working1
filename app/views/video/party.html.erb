@@ -10,9 +10,8 @@
   </toolbar>
 </main>
 
-
-<script type="text/javascript">
- const room = new VideoExpress.Room({
+<script>
+  const room = new VideoExpress.Room({
    apiKey: '<%= @api_key %>', // add your OpenTok API key
    sessionId: '<%= @session_id %>', // add your OpenTok Session ID
    token: '<%= @token %>', // add your OpenTok token
@@ -21,5 +20,4 @@
  });
  room.join();
 </script>
-
 
