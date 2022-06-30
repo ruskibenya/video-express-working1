@@ -32,7 +32,5 @@ class WatchParty < ApplicationRecord
     @token = user_name == moderator_name ? @opentok.generate_token(session_id, { role: :moderator }) : @opentok.generate_token(session_id)
   end
 
-  def destroy_session
-  end
 
 end

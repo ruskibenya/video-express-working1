@@ -47,17 +47,8 @@
 
 
 
-// Chat Side Drawer Styles
-aside{
-  position: fixed;
-  right: 0;
-}
-
-
 
 // toolbar styles
-
-
 .toolbar{
   display: flex;
   justify-content: space-around;
@@ -86,14 +77,3 @@ vwc-tooltip {
   text-align: center;
 }
 
-
-// chat styles
-.chat{
-  width: 200px;
-  height: calc(100vh - 64px);
-  background-color: var(--vvd-color-primary);
-}
-
-.avatar{
-  background-color: var(--vvd-color-announcement);
-}

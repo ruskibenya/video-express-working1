@@ -28,8 +28,6 @@ class VideoController < ApplicationController
     end
   end
 
-  def chat
-  end
 
   private
 
